@@ -1,16 +1,31 @@
-## Hi there 👋
+# Data Science Portfolio
 
-<!--
-**Only1SweetZz/Only1SweetZz** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+Welcome! I'm **Only1SweetZz**, an aspiring data scientist. This portfolio showcases my projects, skills, and learning journey—built entirely with free resources.
 
-Here are some ideas to get you started:
+## 🚀 About Me
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+- **Background:** (Indie Artist—e.g., Recent Graduate Student, Career changer, Paralegal background, etc.)
+- **Interests:** Data science, Machine learning, Visualization, Storytelling
+- **Contact:** [GitHub Profile](https://github.com/Only1SweetZz)
+
+## 🛠 Skills
+
+- **Languages:** Python, SQL
+- **Libraries:** Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn
+- **Tools:** Jupyter Notebook, Google Colab, 
+
+## 📂 Projects
+
+| Project                      | Description                                                      | Link |
+|------------------------------|------------------------------------------------------------------|------|
+| Titanic EDA & Visualization  | Exploratory data analysis and visualization on Titanic dataset    | [Titanic EDA](projects/titanic-eda/README.md) |
+
+Feel free to explore each project folder for code, notebooks, and explanations.
+
+---
+
+## 💡 How I Build for Free
+
+- **Code & Hosting:** [GitHub](https://github.com/)
+- **Notebooks:** [Google Colab](https://colab.research.google.com/)
+- **Datasets:** [Kaggle Datasets](https://www.kaggle.com/datasets), [UCI ML Repo](https://archive.ics.uci.edu/ml/index.php)
