@@ -1,0 +1,175 @@
+{
+  "name": "epk-generator",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EPK Generator</title>
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+</body>
+</html>
+import React, { useState } from "react";
+import EPKForm from "./EPKForm";
+import EPKPreview from "./EPKPreview";
+
+function App() {
+  const [epkData, setEpkData] = useState(null);
+
+  return (
+    <div style={{ maxWidth: 800, margin: "auto", padding: 20 }}>
+      <h1>EPK Generator</h1>
+      {!epkData ? (
+        <EPKForm onSubmit={setEpkData} />
+      ) : (
+        <EPKPreview data={epkData} onEdit={() => setEpkData(null)} />
+      )}
+      <footer style={{ marginTop: 40, fontSize: 12, color: "#888" }}>
+        Free EPK generator for artists - Hosted on GitHub Pages
+      </footer>
+    </div>
+  );
+}
+
+export default App;
+
+import React, { useState } from "react";
+
+export default function EPKForm({ onSubmit }) {
+  const [form, setForm] = useState({
+    artistName: "",
+    bio: "",
+    photo: "",
+    musicLinks: "",
+    socialLinks: "",
+    press: "",
+    contact: "",
+    events: "",
+  });
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSubmit(form);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Artist/Band Name<br />
+        <input name="artistName" value={form.artistName} onChange={handleChange} required />
+      </label>
+      <br /><br />
+      <label>
+        Bio<br />
+        <textarea name="bio" value={form.bio} onChange={handleChange} rows={4} required />
+      </label>
+      <br /><br />
+      <label>
+        Photo URL (link to image)<br />
+        <input name="photo" value={form.photo} onChange={handleChange} />
+      </label>
+      <br /><br />
+      <label>
+        Music Links (YouTube, Spotify, etc. - comma separated)<br />
+        <input name="musicLinks" value={form.musicLinks} onChange={handleChange} />
+      </label>
+      <br /><br />
+      <label>
+        Social Media Links (comma separated)<br />
+        <input name="socialLinks" value={form.socialLinks} onChange={handleChange} />
+      </label>
+      <br /><br />
+      <label>
+        Press/Reviews<br />
+        <textarea name="press" value={form.press} onChange={handleChange} rows={2} />
+      </label>
+      <br /><br />
+      <label>
+        Contact Info<br />
+        <input name="contact" value={form.contact} onChange={handleChange} required />
+      </label>
+      <br /><br />
+      <label>
+        Upcoming Events/Gigs<br />
+        <textarea name="events" value={form.events} onChange={handleChange} rows={2} />
+      </label>
+      <br /><br />
+      <button type="submit">Preview My EPK</button>
+    </form>
+  );
+}
+
+import React from "react";
+
+export default function EPKPreview({ data, onEdit }) {
+  return (
+    <div style={{ background: "#fff", padding: 20, borderRadius: 8, boxShadow: "0 2px 8px #ccc" }}>
+      <button onClick={onEdit} style={{ float: "right" }}>Edit</button>
+      <h2>{data.artistName}</h2>
+      {data.photo && <img src={data.photo} alt="Artist" style={{ maxWidth: 200, borderRadius: 8 }} />}
+      <h3>Bio</h3>
+      <p>{data.bio}</p>
+      <h3>Music</h3>
+      <ul>
+        {data.musicLinks.split(",").map((link, idx) => (
+          link.trim() && <li key={idx}><a href={link.trim()} target="_blank" rel="noopener noreferrer">{link.trim()}</a></li>
+        ))}
+      </ul>
+      <h3>Social Media</h3>
+      <ul>
+        {data.socialLinks.split(",").map((link, idx) => (
+          link.trim() && <li key={idx}><a href={link.trim()} target="_blank" rel="noopener noreferrer">{link.trim()}</a></li>
+        ))}
+      </ul>
+      {data.press && (
+        <>
+          <h3>Press/Reviews</h3>
+          <p>{data.press}</p>
+        </>
+      )}
+      <h3>Contact</h3>
+      <p>{data.contact}</p>
+      {data.events && (
+        <>
+          <h3>Upcoming Events</h3>
+          <p>{data.events}</p>
+        </>
+      )}
+      <br />
+      <button onClick={() => window.print()}>Print / Export as PDF</button>
+    </div>
+  );
+}
+
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
